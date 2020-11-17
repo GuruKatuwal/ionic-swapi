@@ -10,7 +10,7 @@ export class HomePage {
 
   constructor(private swapiSvc: SwapiService) {
     this.swapiSvc.fetchPlanets().subscribe(
-      
+      data => console.log(data)
     );
   }
 
