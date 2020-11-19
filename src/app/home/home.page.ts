@@ -15,9 +15,18 @@ export class HomePage {
       data => this.planets = [
         ...this.planets,
         ...data
-      ],
-      err => console.err(err)
+      ].map(x => ({
+        ...x,
+        displayColor: this.getDisplayColor(x),
+      })).sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1),
+      err => console.error(err)
     );
+  }
+  getDisplayColor(planet){
+    return planet.name == 'unknown' ?
+    'goldenrod' :
+    planet.name == 'Totooine' ?
+    'green' : 'inherit'
   }
 
 }
