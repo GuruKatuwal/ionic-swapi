@@ -10,8 +10,12 @@ export class SwapiService {
   constructor(private httpSvc: HttpClient) { }
   fetchPlanets(){
     return this.httpSvc.get("https://swapi.dev/api/planets/").pipe(
-      tap(x => console.log(x))
-
+      tap(x => console.log(x)),
+      map(x => (x as any).results.map(y => ({name: y.name}))),
+      tap(x => console.log(x)),
+      repeat(10)
+      // map(x => (x as any).map(({name: x.name }))),
+      // tap(x => console.log(x))
     );
   }
 }

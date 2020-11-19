@@ -7,10 +7,16 @@ import { SwapiService } from '../swapi.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  planets = [];
   constructor(private swapiSvc: SwapiService) {
-    this.swapiSvc.fetchPlanets().subscribe(
-      data => console.log(data)
+    this.swapiSvc
+    .fetchPlanets()
+    .subscribe(
+      data => this.planets = [
+        ...this.planets,
+        ...data
+      ],
+      err => console.err(err)
     );
   }
 
