@@ -25,7 +25,7 @@ export class HomePage {
   getDisplayColor(planet){
     return planet.name == 'unknown' ?
     'goldenrod' :
-    planet.name == 'Totooine' ?
+    planet.name == 'Tatooine' ?
     'green' : 'inherit'
   }
 
