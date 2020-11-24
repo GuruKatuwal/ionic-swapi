@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SwapiService } from '../swapi.service';
+import { BizLogicService } from '../biz-logic.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,8 @@ import { SwapiService } from '../swapi.service';
 })
 export class HomePage {
   planets = [];
-  constructor(private swapiSvc: SwapiService) {
+  constructor(private swapiSvc: SwapiService,
+  private bizLogicSvc: BizLogicService) {
     this.swapiSvc
     .fetchPlanets()
     .subscribe(
@@ -17,16 +19,11 @@ export class HomePage {
         ...data
       ].map(x => ({
         ...x,
-        displayColor: this.getDisplayColor(x),
+        displayColor: this.bizLogicSvc.getDisplayColor(x),
       })).sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1),
       err => console.error(err)
     );
   }
-  getDisplayColor(planet){
-    return planet.name == 'unknown' ?
-    'goldenrod' :
-    planet.name == 'Tatooine' ?
-    'green' : 'inherit'
-  }
+
 
 }
